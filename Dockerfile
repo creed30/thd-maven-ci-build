@@ -7,7 +7,8 @@
 
 FROM ubuntu:14.04
 
-MAINTAINER Chris Gruel (christopher_a_gruel@homedepot.com)
+# forked from Chris' Repo
+MAINTAINER Chad Reed (chad_n_reed@homedepot.com)
 
 # setup proxy variables
 ENV QA_PROXY_HOST=str-www-proxy2-qa.homedepot.com
