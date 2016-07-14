@@ -87,8 +87,8 @@ RUN npm install -g bower
 #install gulp
 RUN npm install -g gulp
 
-ENV http_proxy="http://$QA_PROXY_HOST:$QA_PROXY_PORT"
-ENV https_proxy="http://$QA_PROXY_HOST:$QA_PROXY_PORT"
+# ENV http_proxy="http://$QA_PROXY_HOST:$QA_PROXY_PORT"
+# ENV https_proxy="http://$QA_PROXY_HOST:$QA_PROXY_PORT"
 
 # install cf zero-downtime-push plugin
 RUN git config --global http.sslVerify false && go get github.com/concourse/autopilot && git config --global http.sslVerify true
