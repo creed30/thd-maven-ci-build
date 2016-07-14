@@ -16,7 +16,7 @@ ENV QA_PROXY_PORT=8080
 # install apps
 RUN apt-get update && apt-get install -y \
 wget \
-maven \
+gradle \
 git \
 nano \
 curl \
@@ -61,8 +61,8 @@ RUN update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 20000 &
 RUN wget https://cli.run.pivotal.io/stable?release=linux64-binary -O /tmp/cf.tgz --no-check-certificate
 RUN tar zxf /tmp/cf.tgz -C /usr/bin && chmod 755 /usr/bin/cf
 
-# install maven
-ENV MAVEN_HOME /usr/share/maven
+# install gradle
+ENV GRADLE_HOME /usr/share/gradle
 
 # configure git
 RUN git config --global http.sslcainfo "$PWD/certificates/entrust_g2_ca.cer"
@@ -91,10 +91,10 @@ ENV https_proxy="http://$QA_PROXY_HOST:$QA_PROXY_PORT"
 RUN git config --global http.sslVerify false && go get github.com/concourse/autopilot && git config --global http.sslVerify true
 RUN cf install-plugin $GOPATH/bin/autopilot -f
 
-# set maven to save dependencies
-RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -Dartifact=org.hibernate:hibernate-entitymanager:3.4.0.GA:jar:sources
-RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -Dartifact=org.apache.maven.plugins:maven-clean-plugin:2.5:jar:sources
-RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -Dartifact=org.apache.maven.surefire:surefire-booter:2.10:jar:sources
+# # set maven to save dependencies
+# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -Dartifact=org.hibernate:hibernate-entitymanager:3.4.0.GA:jar:sources
+# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -Dartifact=org.apache.maven.plugins:maven-clean-plugin:2.5:jar:sources
+# RUN mvn org.apache.maven.plugins:maven-dependency-plugin:2.8:get -Dartifact=org.apache.maven.surefire:surefire-booter:2.10:jar:sources
 
 # install jq
 RUN curl -o /usr/local/bin/jq -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 \
