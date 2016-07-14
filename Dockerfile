@@ -23,8 +23,10 @@ nano \
 curl \
 libxml-xpath-perl \
 build-essential \
-&& curl -sL https://deb.nodesource.com/setup | sudo bash - && \
-apt-get install -yq nodejs
+nodejs \
+npm
+# && curl -sL https://deb.nodesource.com/setup | sudo bash - && \
+# apt-get install -yq nodejs
 
 RUN npm config set strict-ssl false && npm install -g npm
 
